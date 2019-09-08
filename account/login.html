@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ru" dir="ltr">
+	<head>
+		{% include 'includs/head.html' %}
+	</head>
+	<body class="bg-account">
+	    <!-- page -->
+		<div class="page">
+
+			<!-- page-content -->
+			<div class="page-content">
+				<div class="container text-center text-dark">
+					<div class="row">
+						<div class="col-lg-4 d-block mx-auto">
+							<div class="row">
+								<div class="col-xl-12 col-md-12 col-md-12">
+									<div class="card">
+										<div class="card-body">
+											<div class="text-center mb-6">
+												<img src="{{site.logo}}" width="50%" class="" alt="">
+											</div>
+											<h3>Авторизация</h3>
+											<p class="text-muted">Личный кабинет необходим для идентификации вашей личности</p>
+											<div class="input-group mb-3">
+												<span class="input-group-addon bg-white"><i class="fa fa-user"></i></span>
+												<input name="login" type="text" class="form-control" id="phone" placeholder="Номер телефона">
+											</div>
+											<div class="input-group mb-4">
+												<span class="input-group-addon bg-white"><i class="fa fa-unlock-alt"></i></span>
+												<input name="password" type="password" class="form-control" placeholder="Пароль">
+											</div>
+											<div class="row">
+												<div class="col-12">
+													<button type="button" class="btn btn-primary btn-block login">Войти</button>
+												</div>
+												<div class="col-12">
+													<a href="/lk/recuve" class="btn btn-link box-shadow-0 px-0">Забыли пароль?</a>
+												</div>
+												<div class="col-12">
+													<a href="/lk/reg" class="btn btn-link box-shadow-0 px-0">Регистрация</a>
+												</div>
+											</div>
+											<div class="mt-6 btn-list">
+												<button type="button" disabled="" class="btn btn-icon btn-google">Войти через <img src="./account/assets/images/gov.png" width="10%"></button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<!-- page-content end -->
+		</div>
+		<!-- page End-->
+
+		{% include 'includs/scripts.html' %}
+
+		<script type="text/javascript">
+			$('.login').on('click', function() {
+				$.post({
+					url: '/api/user',
+					data: {
+						type: 			'login',
+						login:       	$("[name='login']").val(), 
+						password:    	$("[name='password']").val()
+					},
+					success: function(json) {
+						if (json.type == 'success') {
+							$.cookie('authData', json.session, { expires: 7, path: '/' });
+							$.cookie('uid', json.uid, { expires: 7, path: '/' });
+							location.reload();
+						}else{
+							alert('Проверьте правильность ввода данных!');
+						}
+					}
+				});
+			})
+		</script>
+
+	</body>
+</html>

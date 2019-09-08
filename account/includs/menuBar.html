@@ -1,0 +1,72 @@
+<!-- Sidebar menu-->
+<div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+<aside class="app-sidebar">
+    <div class="app-sidebar__user pb-0">
+        <div class="user-body">
+            <span class="avatar avatar-xxl brround text-center cover-image" data-image-src="{{user.avatar.puth}}"></span>
+        </div>
+        <div class="user-info">
+            <a href="#" class="ml-2"><span class="text-dark app-sidebar__user-name font-weight-semibold">{{user.name}} {{user.surname}}</span><br>
+                <span class="text-muted app-sidebar__user-name text-sm">{{user.group.name}}</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="tab-menu-heading siderbar-tabs border-0 p-0">
+        <div class="tabs-menu ">
+            <!-- Tabs -->
+            <ul class="nav panel-tabs">
+                <li><a href="/lk/support" data-toggle="tab"><i class="fa fa-envelope fs-17"></i></a></li>
+                <li><a href="/lk/profile" data-toggle="tab"><i class="fa fa-user fs-17"></i></a></li>
+                <li><a href="/lk/exit" title="logout"><i class="fa fa-power-off fs-17"></i></a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="panel-body tabs-menu-body side-tab-body p-0 border-0 ">
+        <div class="tab-content">
+            <div class="tab-pane active " id="index1">
+                <div class="row row-demo-list">
+                    <div id="parentVerticalTab" class="col-md-12">
+                        <ul class="resp-tabs-list hor_1">
+                            <li class="resp-tab-active active"><i class="side-menu__icon typcn typcn-device-desktop"></i></li>
+                            <li><i class="side-menu__icon typcn typcn-th-large-outline"></i></li>
+                        </ul>
+                        <div class="resp-tabs-container hor_1">
+                            <div class="resp-tab-content-active">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h4 class="font-weight-semibold">Основное меню</h4>
+                                        <div class="side-menu p-0">
+                                            <a href="/lk" class="slide-item">Главная</a>
+                                            <a href="/lk/event?page=add" class="slide-item">Создать событие</a>
+                                            <a href="/lk/event?page=my" class="slide-item">Мои заявки</a>
+                                            <a href="/lk/chat" class="slide-item">Чат</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h4 class="font-weight-semibold">События</h4>
+                                        {% if user.group.id >= 2 %}
+                                            <a href="/lk/event?page=monitoring&type=all" class="slide-item">Мониторинг</a>
+                                            <a href="/lk/event?page=monitoring&type=new" class="slide-item">Новые</a>
+                                            <a href="/lk/event?page=monitoring&type=success" class="slide-item">Завершённые</a>
+                                            <a href="/lk/chat" class="slide-item">Чат с гражданскими</a>
+                                        {% else %}
+                                            <a href="/lk/event?type=near" class="slide-item">Рядом с вами</a>
+                                            <a href="/lk/event?type=area" class="slide-item">В районе</a>
+                                            <a href="/lk/event?type=city" class="slide-item">В городе</a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- col-4 -->
+            </div>
+        </div>
+    </div>
+</aside>
+<!--sidemenu end-->

@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="ru" dir="ltr">
+	<head>
+		{% include 'includs/head.html' %}
+	</head>
+
+	<body class="app sidebar-mini rtl">
+
+		<!--Global-Loader-->
+		<div id="global-loader">
+			<img src="./account/assets/images/icons/loader.svg" alt="loader">
+		</div>
+
+		<div class="page">
+			<div class="page-main">
+
+				<!--app-header-->
+				<div class="app-header header d-flex">
+					<div class="container-fluid">
+						<div class="d-flex">
+						    <a class="header-brand" href="/">
+								<img src="{{site.logo}}" class="header-brand-img main-logo" alt="Hogo logo">
+								<img src="{{site.ico}}" class="header-brand-img icon-logo" alt="Hogo logo">
+							</a><!-- logo-->
+							<a aria-label="Hide Sidebar" class="app-sidebar__toggle" data-toggle="sidebar" href="#"></a>
+						</div>
+					</div>
+				</div>
+				<!--app-header end-->
+
+				{% include 'includs/menuBar.html' %}
+				
+                <!-- app-content-->
+				<div class="app-content  my-3 my-md-5">
+					<div class="side-app">
+						<div class="bg-white p-3 header-secondary row">
+							<div class="col">
+								<div class="d-flex">
+								</div>
+
+							</div>
+							<div class="col col-auto">
+								<a class="btn btn-light mt-4 mt-sm-0" href="#"><i class="fe fe-help-circle mr-1 mt-1"></i>  Поддержка</a>
+								<a class="btn btn-success mt-4 mt-sm-0" href="/lk/event?page=add"><i class="fe fe-plus mr-1 mt-1"></i> Добавить событие</a>
+							</div>
+						</div>
+					    <!-- page-header -->
+						<div class="page-header">
+							<ol class="breadcrumb"><!-- breadcrumb -->
+								<li class="breadcrumb-item"><a href="#">Главная</a><p style="font-size: 30px; color:#d66f0e;">Статистика завершенных событий</p></li>
+							</ol><!-- End breadcrumb -->
+							<div class="ml-auto">
+								<div class="input-group">
+									<a  class="btn btn-primary text-white mr-2"  id="daterange-btn">
+										<span>
+											<i class="fa fa-calendar"></i> Фильтр Событий
+										</span>
+										<i class="fa fa-caret-down"></i>
+									</a>
+									<a href="#" class="btn btn-secondary text-white" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="Rating">
+										<span>
+											<i class="fa fa-star"></i>
+										</span>
+									</a>
+								</div>
+							</div>
+						</div>
+						<!-- End page-header -->
+
+
+						<!--<div class="row">
+							<div class="col-md-12">
+								<div class="owl-carousel owl-carousel2 owl-theme mb-5">
+									<div class="item">
+										<div class="card mb-0">
+											<div class="row">
+												<div class="col-4">
+													<div class="feature">
+														<div class="fa-stack fa-lg fa-2x icon bg-primary-transparent">
+															<i class="si si-briefcase  fa-stack-1x text-primary"></i>
+														</div>
+													</div>
+												</div>
+												<div class="col-8">
+													<div class="card-body p-3  d-flex">
+														<div>
+															<p class="text-muted mb-1">Total Income</p>
+															<h2 class="mb-0 text-dark">18,367K</h2>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="item">
+										<div class="card mb-0">
+											<div class="row">
+												<div class="col-4">
+													<div class="feature">
+														<div class="fa-stack fa-lg fa-2x icon bg-success-transparent">
+															<i class="si si-drawer fa-stack-1x text-success"></i>
+														</div>
+													</div>
+												</div>
+												<div class="col-8">
+													<div class="card-body p-3  d-flex">
+														<div>
+															<p class="text-muted mb-1">Total Profit</p>
+															<h2 class="mb-0 text-dark">35%</h2>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="item">
+										<div class="card mb-0">
+											<div class="row">
+												<div class="col-4">
+													<div class="feature">
+														<div class="fa-stack fa-lg fa-2x icon bg-pink-transparent">
+															<i class="si si-layers fa-stack-1x text-pink"></i>
+														</div>
+													</div>
+												</div>
+												<div class="col-8">
+													<div class="card-body p-3  d-flex">
+														<div>
+															<p class="text-muted mb-1">Total Revenue</p>
+															<h2 class="mb-0 text-dark">3,548K</h2>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="item">
+										<div class="card mb-0">
+											<div class="row">
+												<div class="col-4">
+													<div class="feature">
+														<div class="fa-stack fa-lg fa-2x icon bg-warning-transparent">
+															<i class="si si-chart fa-stack-1x text-warning"></i>
+														</div>
+													</div>
+												</div>
+												<div class="col-8">
+													<div class="card-body p-3  d-flex">
+														<div>
+															<p class="text-muted mb-1">Total Sales</p>
+															<h2 class="mb-0 text-dark">9,756</h2>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div> -->
+
+						<div class="row">
+							<div class="col-md-12">
+								<div class="card card-bgimg br-7">
+									<div class="row">
+										<div class="col-xl-2 col-lg-6 col-sm-6 pr-0 pl-0">
+											<div class="card-body text-center">
+												<h5 class="text-white">Сегодня</h5>
+									            <h2 class="mb-2 mt-3 fs-2 text-white mainvalue"><!--{{events.count}}-->0</h2>
+									        </div>
+										</div>
+										<div class="col-xl-2 col-lg-6 col-sm-6 pr-0 pl-0">
+											<div class="card-body text-center">
+												<h5 class="text-white">Вчера</h5>
+									            <h2 class="mb-2 mt-3 fs-2 text-white mainvalue">0</h2>
+									        </div>
+										</div>
+										<div class="col-xl-2 col-lg-6 col-sm-6 pr-0 pl-0">
+											<div class="card-body text-center">
+												<h5 class="text-white">Неделю Назад</h5>
+									            <h2 class="mb-2 mt-3 fs-2 text-white mainvalue">0</h2>
+									             
+									        </div>
+										</div>
+										<div class="col-xl-2 col-lg-6 col-sm-6 pr-0 pl-0">
+											<div class="card-body text-center">
+												<h5 class="text-white">Месяц Назад</h5>
+									            <h2 class="mb-2 mt-3 fs-2 text-white mainvalue">0</h2>
+									        </div>
+										</div>
+										<div class="col-xl-2 col-lg-6 col-sm-6 pr-0 pl-0">
+											<div class="card-body text-center">
+												<h5 class="text-white">6 Месяцев Назад</h5>
+									            <h2 class="mb-2 mt-3 fs-2 text-white mainvalue">0</h2>
+									            
+									        </div>
+										</div>
+										<div class="col-xl-2 col-lg-6 col-sm-6 pr-0 pl-0">
+											<div class="card-body text-center">
+												<h5 class="text-white">Год Назад</h5>
+									            <h2 class="mb-2 mt-3 fs-2 text-white mainvalue">0</h2>
+									             
+									        </div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							{% include 'includs/map.html' %}
+						</div>
+					</div>
+
+					<!-- Right-sidebar-->
+					<!-- End Rightsidebar-->
+
+					<!--footer-->
+					<footer class="footer">
+						<div class="container">
+							<div class="row align-items-center flex-row-reverse">
+								<div class="col-lg-12 col-sm-12   text-center">
+									Копирайт &copy; {{"now"|date("Y")}} <a href="https://city.triplespace.ru" style="color:#d66f0e ;">Проект "Городской информатор"</a> Все права защищены.
+								</div>
+							</div>
+						</div>
+					</footer>
+					<!-- End Footer-->
+
+				</div>
+				<!-- End app-content-->
+			</div>
+		</div>
+		<!-- End Page -->
+
+		<!-- Back to top -->
+		<a href="#top" id="back-to-top"><i class="fa fa-angle-up"></i></a>
+
+		{% include "includs/script-panel.html" %}
+	</body>
+</html>

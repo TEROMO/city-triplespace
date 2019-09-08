@@ -1,0 +1,41 @@
+<div class="col-12">
+        <div class="card">
+            <div class="card-header ">
+                <h3 class="card-title ">Обработка заявок</h3>
+            </div>
+            <div class="table-responsive">
+                <table class="table card-table table-striped table-vcenter table-outline table-bordered text-nowrap ">
+                    <thead>
+                        <tr style="text-transform: lowercase;">
+                            <th scope="col" class="border-top-0">ИД</th>
+                            <th scope="col" class="border-top-0">Имя события</th>
+                            <th scope="col" class="border-top-0">Категория</th>
+                            <th scope="col" class="border-top-0">Дата</th>
+                            <th scope="col" class="border-top-0">Статус</th>
+                            <th scope="col" class="border-top-0">Информация</th>
+                        </tr>
+                    </thead>
+                    <tbody class="monitor">
+                        {% for item in events %}
+                        {% if item.category.id == 1 %}
+                        <tr>
+                            <td>{{item.id}}</td>
+                            <td>{{item.title}}</td>
+                            <td>{{item.subcategory.name}}</td>
+                            <td>{{item.date_add}}</td>
+                            <td>{{item.status}}</td>
+                            <td>
+                                <a class="btn btn-sm btn-info" target="_blank" href="/lk/event?page=event&id={{item.id}}"><i class="fa fa-info-circle"></i> Подробности</a> </td>
+                            </td>
+                        </tr>
+                        {% endif %}
+                        {% else %}
+                        <tr>
+                            <th scope="row" colspan="6">Нет записей</th>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,55 @@
+<div class="col-xl-12 col-lg-12 col-md-12">
+    <div class="card">
+        <div class="card-header custom-header">
+            <div>
+                <h3 class="card-title">Рассказать о ситуации</h3>
+                <h6 class="card-subtitle">Будет оповещена соответсвующая государственная служба и близлежащее общество</h6>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="form-group col-12">
+                    <label for="">Выберете/Введите категорию</label>
+                    <select class="form-control select" name="category">   
+                        <option value="" disabled selected>Начните вводить и выберете категорию</option> 
+                        {% for item in engine.category %}
+                            <option value="{{item.cid}}_{{item.id}}">{{item.cname}}: {{item.name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group col-12">
+                    <label for="">Заголовок (объект происшествия или происшествие)</label>
+                    <input class="form-control" type="text" name="title">
+                </div>
+                <div class="form-group col-12">
+                    <label for="">Описание (не обязательно)</label>
+                    <textarea name="description" class="form-control"></textarea>
+                </div>
+                <div class="form-group col-12">
+                    <label for="">Тип адреса</label>
+                    <select class="form-control" name="addrtype">
+                        <option value="id">Ваши адреса</option>                        
+                        <option value="text" selected>Собственный ввод</option>                        
+                        <option value="map">Воспользоваться геолокацией</option>                        
+                    </select>
+                </div>
+                <div class="form-group col-12">
+                    <label for="">Адрес</label>
+                    <input placeholder="Начните вводить с города: г. Чебоксары" class="form-control enter addr-active a-text" name="addr" type="text">
+                    <select class="form-control a-id" name="addr">
+                        {% for item in user.address %}
+                        <option value="{{item.id}}">{{item.location}}</option>
+                        {% endfor %}
+                    </select>
+                    <div class="row">
+                        <input class="form-control a-map col-6"  placeholder="Широта"  name="latitude"  type="text">
+                        <input class="form-control a-map col-6" placeholder="Долгота" name="longitude" type="text">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <div class="pull-right"><button class="btn btn-success add">Отправить событие</button></div>
+        </div>
+    </div>
+</div>

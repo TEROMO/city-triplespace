@@ -1,0 +1,93 @@
+<!-- Jquery js-->
+<script src="/account/assets/js/vendors/jquery-3.2.1.min.js"></script>
+
+<script type='text/javascript'>
+    $(document).ready(function() {
+        var map = L.map('map').setView([57.1668968, 65.5152054], 15);
+
+        function addPick(status, map, cordinat = [57.1668968, 65.5152054]) {
+            switch (status) {
+                case 'cancel':
+                    icon = '/account/assets/plugins/map/images/type/Cancel-eventsqr.png';
+                    break;
+                
+                case 'success':
+                    icon = '/account/assets/plugins/map/images/type/Complete-event (2).png';
+                break;
+
+                case 'wait':
+                    icon = '/account/assets/plugins/map/images/type/wait-event.png';
+                break;
+            }
+            var myIcon = L.icon({
+                iconUrl: icon,
+                iconSize: [38, 38]
+            });
+            L.marker(cordinat, {icon: myIcon}).addTo(map);
+        }
+
+        addPick('cancel', map, [57.1998968, 65.5782054]);
+        addPick('wait', map, [57.1108968, 65.5122054]);
+        addPick('cancel', map, [57.1668968, 65.5152054]);
+        addPick('wait', map, [57.1768700, 65.55520000]);
+        addPick('success', map, [57.1470854, 65.50027054]);
+
+        //Добавляем на нашу карту слой OpenStreetMap
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+    }); 
+</script>
+
+<!--Bootstrap.min js-->
+<script src="/account/assets/plugins/bootstrap/popper.min.js"></script>
+<script src="/account/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+<!--Jquery Sparkline js-->
+<script src="/account/assets/js/vendors/jquery.sparkline.min.js"></script>
+
+<!-- Chart Circle js-->
+<script src="/account/assets/js/vendors/circle-progress.min.js"></script>
+
+<!-- Star Rating js-->
+<script src="/account/assets/plugins/rating/jquery.rating-stars.js"></script>
+
+<!--Moment js-->
+<script src="/account/assets/plugins/moment/moment.min.js"></script>
+
+<!-- Daterangepicker js-->
+<script src="/account/assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+<!--Side-menu js-->
+<script src="/account/assets/plugins/toggle-sidebar/sidemenu.js"></script>
+
+<!-- Sidebar Accordions js -->
+<script src="/account/assets/plugins/accordion1/js/easyResponsiveTabs.js"></script>
+
+<!-- Custom scroll bar js-->
+<script src="/account/assets/plugins/scroll-bar/jquery.mCustomScrollbar.concat.min.js"></script>
+
+<!--Owl Carousel js -->
+<script src="/account/assets/plugins/owl-carousel/owl.carousel.js"></script>
+<script src="/account/assets/plugins/owl-carousel/owl-main.js"></script>
+
+<!-- Rightsidebar js -->
+<script src="/account/assets/plugins/sidebar/sidebar.js"></script>
+
+<!-- Charts js-->
+<script src="/account/assets/plugins/chart/chart.bundle.js"></script>
+<script src="/account/assets/plugins/chart/utils.js"></script>
+
+<!--Time Counter js-->
+<script src="/account/assets/plugins/counters/jquery.missofis-countdown.js"></script>
+<script src="/account/assets/plugins/counters/counter.js"></script>
+
+<!--Morris  Charts js-->
+<script src="/account/assets/plugins/morris/raphael-min.js"></script>
+<script src="/account/assets/plugins/morris/morris.js"></script>
+
+<!-- Custom-charts js-->
+<script src="/account/assets/js/index1.js"></script>
+
+<!-- Custom js-->
+<script src="/account/assets/js/custom.js"></script>

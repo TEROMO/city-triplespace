@@ -1,0 +1,39 @@
+<div class="col-12">
+    <div class="card">
+        <div class="card-header ">
+            <h3 class="card-title ">События</h3>
+        </div>
+        <div class="table-responsive">
+            <table class="table card-table table-striped table-vcenter table-outline table-bordered text-nowrap ">
+                <thead>
+                    <tr style="text-transform: lowercase;">
+                        <th scope="col" class="border-top-0">ИД</th>
+                        <th scope="col" class="border-top-0">Имя события</th>
+                        <th scope="col" class="border-top-0">Категория</th>
+                        <th scope="col" class="border-top-0">Дата</th>
+                        <th scope="col" class="border-top-0">Статус</th>
+                        <th scope="col" class="border-top-0">Информация</th>
+                    </tr>
+                </thead>
+                <tbody class="monitor">
+                    {% for item in events %}
+                    <tr>
+                        <th scope="row">{{item.id}}</th>
+                        <td>{{item.title}}</td>
+                        <td>{{item.category}}</td>
+                        <td>{{item.date_add|date("d.m.Y H:i")}}</td>
+                        <td>{{item.status}}</td>
+                        <td>
+                            <a class="btn btn-sm btn-info" href="/lk/events?event={{item.id}}"><i class="fa fa-info-circle"></i> Подробности</a> </td>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <th scope="row">Нет записей</th>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

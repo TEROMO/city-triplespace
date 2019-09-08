@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="ru" dir="ltr">
+	<head>
+		{% include 'includs/head.html' %}
+	</head>
+	<body class="bg-account">
+	    <!-- page -->
+		<div class="page">
+
+			<!-- page-content -->
+			<div class="page-content">
+				<div class="container text-center text-dark">
+					<div class="row">
+						<div class="col-lg-4 d-block mx-auto">
+							<div class="row">
+								<div class="col-xl-12 col-md-12 col-md-12">
+									<div class="card">
+										<div class="card-body">
+											<div class="text-center mb-6">
+												<img src="{{site.logo}}" width="50%" class="" alt="">
+											</div>
+											<h3>Регистрация</h3>
+											<p class="text-muted">Создание нового аккаунта</p>
+											<center>
+												<div class="input-group mb-3 col-12">
+													<button type="button" disabled="" class="btn btn-icon btn-google">Зарегистрироваться через <img src="/account/assets/images/gov.png" width="10%"></button>
+												</div>
+											</center>
+											<div class="input-group mb-3">
+												<span class="input-group-addon bg-white"><i class="fa fa-user w-4"></i></span>
+												<input type="text" class="form-control" name="name" placeholder="Имя*">
+											</div>
+											<div class="input-group mb-4">
+												<span class="input-group-addon bg-white"><i class="fa fa-user  w-4"></i></span>
+												<input type="text" class="form-control" name="surname" placeholder="Фамилия*">
+											</div>
+											<div class="input-group mb-4">
+												<span class="input-group-addon bg-white"><i class="fa fa-user  w-4"></i></span>
+												<input type="text" class="form-control" name="patronymic" placeholder="Очество">
+											</div>
+											<div class="input-group mb-4">
+												<span class="input-group-addon bg-white"><i class="fa fa-phone  w-4"></i></span>
+												<input type="text" class="form-control" name="phone" id="phone" placeholder="Телефон*">
+											</div>
+											<div class="input-group mb-4">
+												<span class="input-group-addon bg-white"><i class="fa fa-envelope  w-4"></i></span>
+												<input type="text" class="form-control" name="email" placeholder="Введите почту*">
+											</div>
+											<div class="input-group mb-4">
+												<span class="input-group-addon bg-white"><i class="fa fa-certificate  w-4"></i></span>
+												<input type="text" class="form-control" name="polis" id="polis" placeholder="Полис">
+											</div>
+											<div class="input-group mb-4">
+												<span class="input-group-addon bg-white"><i class="fa fa-medkit  w-4"></i></span>
+												<input type="text" class="form-control" name="diseases" placeholder="Диагноз, противопоказания*">
+											</div>
+											<div class="input-group mb-4">
+												<span class="input-group-addon bg-white"><i class="fa fa-vcard  w-4"></i></span>
+												<input type="text" class="form-control" name="passport-seria" id="passport-seria" placeholder="Серия и номер паспорта*">
+											</div>
+											<div class="input-group mb-4">
+												<span class="input-group-addon bg-white"><i class="fa fa-vcard  w-4"></i></span>
+												<input type="text" class="form-control" name="passport-get" id="passport-get" placeholder="Кем выдан*">
+											</div>
+											<div class="input-group mb-4">
+												<span class="input-group-addon bg-white"><i class="fa fa-vcard  w-4"></i></span>
+												<input type="text" class="form-control" name="passport-year" id="passport-year" placeholder="Когда выдан (дд.мм.гггг)*">
+											</div>
+											<div class="input-group mb-4">
+												<span class="input-group-addon bg-white"><i class="fa fa-unlock-alt  w-4"></i></span>
+												<input type="password" class="form-control" name="password" placeholder="Введите пароль">
+											</div>
+											<div class="input-group mb-4">
+												<span class="input-group-addon bg-white"><i class="fa fa-unlock-alt  w-4"></i></span>
+												<input type="password" class="form-control" name="rePassword" placeholder="Повторите пароль">
+											</div>
+											<div class="form-group">
+												<label class="custom-control custom-checkbox">
+													<input type="checkbox" class="custom-control-input" id="rules" checked="" />
+													<span class="custom-control-label">Я принимаю <a target="_blank" href="/doc/rules">правила пользования сервисом</a></span>
+												</label>
+											</div>
+											<div class="form-group">
+												<label class="custom-control custom-checkbox">
+													<input type="checkbox" class="custom-control-input" id="dineal" checked="" />
+													<span class="custom-control-label">Я принимаю <a target="_blank" href="/doc/dineal">отказ сервиса от ответсвенности</a></span>
+												</label>
+											</div>
+											<div class="form-group">
+												<label class="custom-control custom-checkbox">
+													<input type="checkbox" class="custom-control-input" id="politic" checked="" />
+													<span class="custom-control-label">Я принимаю <a target="_blank" href="/doc/politic">политику конфиденциальности</a></span>
+												</label>
+											</div>
+											<div class="row">
+												<div class="col-12">
+													<button type="button" class="btn btn-primary btn-block px-4 create">Создать аккаунт</button>
+												</div>
+											</div>
+											<p class="p-5">* Данные обязательны к заполнению</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<!-- page-content end -->
+		</div>
+		<!-- page End-->
+
+		{% include 'includs/scripts.html' %}
+		<script type="text/javascript">
+			$('.create').on('click', function() {
+				$('.create').text('Ожидайте ...');
+				$('.create').attr('disabled', true);
+				if ( $("#rules").prop("checked") && $("#dineal").prop("checked") && $("#politic").prop("checked") ) {
+					if ($("[name='password']").val() == $("[name='rePassword']").val() && $("[name='password']").val() != '') {
+						$.post({
+							url: '/api/user',
+							data: {
+								type: 			'registration',
+								name:       	$("[name='name']").val(), 
+								surname:    	$("[name='surname']").val(),
+								patronymic: 	$("[name='patronymic']").val(),
+								phone:      	$("[name='phone']").val(),
+								email:      	$("[name='email']").val(),
+								polis:      	$("[name='polis']").val(),
+								diseases:   	$("[name='diseases']").val(),
+								password:   	$("[name='password']").val(),
+								passport:   	$("[name='passport-seria']").val(),
+								passport_get:   $("[name='passport-get']").val(),
+								passport_year:  $("[name='passport-year']").val()
+							},
+							success: function(json) {
+								if (json.type == 'success') {
+									$('.create').text('Вы зарегистрированы!');
+									window.location.href = '/';
+								}else{
+									alert('Сервер отправил отрицательный ответ! Проверьте правильность ввода данных!');
+									$('.create').attr('disabled', false);
+									$('.create').text('Создать аккаунт');
+								}
+							}
+						});
+					}else{
+						alert("Ваши пароли не совпадают. Возможно, вы будтете испытывать проблему со входом в будущем. Придумайте более запоминающийся парль!");
+						$('.create').attr('disabled', false);
+						$('.create').text('Создать аккаунт');
+					}
+				}else{
+					alert("Вы должны принять все документы!");
+					$('.create').attr('disabled', false);
+					$('.create').text('Создать аккаунт');
+				}
+			})
+		</script>
+
+	</body>
+</html>

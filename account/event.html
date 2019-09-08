@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="ru" dir="ltr">
+	<head>
+		{% include 'includs/head.html' %}
+	</head>
+
+	<body class="app sidebar-mini rtl">
+
+		<!--Global-Loader-->
+		<div id="global-loader">
+			<img src="/account/assets/images/icons/loader.svg" alt="loader">
+		</div>
+
+		<div class="page">
+			<div class="page-main">
+
+				<!--app-header-->
+				<div class="app-header header d-flex">
+					<div class="container-fluid">
+						<div class="d-flex">
+						    <a class="header-brand" href="/">
+								<img src="{{site.logo}}" class="header-brand-img main-logo" alt="Hogo logo">
+								<img src="{{site.ico}}" class="header-brand-img icon-logo" alt="Hogo logo">
+							</a><!-- logo-->
+							<a aria-label="Hide Sidebar" class="app-sidebar__toggle" data-toggle="sidebar" href="#"></a>
+						</div>
+					</div>
+				</div>
+				<!--app-header end-->
+
+				{% include 'includs/menuBar.html' %}
+				
+				<!-- page-header -->
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item">
+						<a href="/">Главная</a>
+						<a href="#">{{page.title}}</a>
+					</li>
+				</ol>
+
+                <!-- app-content-->
+				<div class="app-content  my-3 my-md-5">
+					<div class="side-app">
+						<div class="row">
+                            {% if page.name == "add" and user.group.id >= 1 %}
+                            	{% include "includs/events/add.html" %}
+                            {% elseif page.name == "monitoring" and user.group.id >= 2 %}
+                            	{% include "includs/events/monitoring.html" %}
+							{% elseif page.name == "event" %}
+								{% include "includs/events/event.html" %}
+                            {% elseif page.name == "my" and user.group.id >= 1 %}
+                            	{% include "includs/events/my.html" %}
+                            {% else %}
+								{% include "includs/events/hub.html" %}
+                            {% endif %}
+						</div>
+					</div>
+
+					<!-- Right-sidebar-->
+					<!-- End Rightsidebar-->
+
+					<!--footer-->
+					<footer class="footer">
+						<div class="container">
+							<div class="row align-items-center flex-row-reverse">
+								<div class="col-lg-12 col-sm-12   text-center">
+									Копирайт &copy; {{"now"|date("Y")}} <a href="https://city.triplespace.ru" style="color:#d66f0e ;">Проект "Городской информатор"</a> Все права защищены.
+								</div>
+							</div>
+						</div>
+					</footer>
+					<!-- End Footer-->
+
+				</div>
+				<!-- End app-content-->
+			</div>
+		</div>
+		<!-- End Page -->
+
+		<!-- Back to top -->
+		<a href="#top" id="back-to-top"><i class="fa fa-angle-up"></i></a>
+
+		{% include "includs/script-panel.html" %}
+		<script src="/account/assets/plugins/select2/select2.full.min.js"></script>
+		<script src="/account/assets/plugins/fias/js/core.js"></script>
+		<script src="/account/assets/plugins/fias/js/fias.js"></script>
+		<script>
+
+		{% if page.name == "add" and user.group.id >= 1 %}
+			$('.select').select2({
+	 			dropdownCssClass: 'select2-outline-info'
+  			});
+			  
+			navigator.geolocation.getCurrentPosition(
+				// Функция обратного вызова при успешном извлечении локации
+				function(position) {
+					$('[name="latitude"]').val(position['coords']['latitude']);
+					$('[name="longitude"]').val(position['coords']['longitude']);				
+				},
+
+				// Функция обратного вызова при неуспешном извлечении локации
+				function(error){
+					alert('Мы не можем получить вашу геолокацию. Браузеру это делать нельзя или ГЕОЛОКАЦИЯ НЕ ВКЛЮЧЕНА');
+				}
+			);
+
+			$('.a-map').css( "display", "none" );
+			$('.a-text').css( "display", "none" );
+			$('.a-id').css( "display", "none" );
+
+			$('[name="addrtype"]').on('change', function() {
+				$('.a-map').css( "display", "none" );
+				$('.a-text').css( "display", "none" );
+				$('.a-id').css( "display", "none" );
+				$('.addr-active').removeClass('addr-active');
+
+				$('.a-' + $('[name="addrtype"]').val()).show();
+				$('.a-' + $('[name="addrtype"]').val()).addClass('addr-active');
+			});
+
+			var address = $('.a-text');
+
+			address.fias({
+				oneString: true,
+			});
+
+			$('.addr-active').show();
+
+			$('.add').on('click', function(){
+				var DATA = {
+						type        :    'add',
+						category    :    $("select[name='category']").val(),
+                		title       :    $("input[name='title']").val(),
+                		description :    $("textarea[name='description']").val(),
+                		addres      :    $(".addr-active[name='addr']").val(),
+                		addres_type :    $("select[name='addrtype']").val(),
+                		latitude    :    $("input[name='latitude']").val(),
+                		longitude   :    $("input[name='longitude']").val()
+					};
+				$.ajax({
+					url:  '/api/events',
+					type: 'POST',
+					data: DATA,
+					success: function (json) {
+						if(json.type == 'error'){
+							alert('Невозможно создать событие!');
+						}else{
+							alert('Событие создано! Все будут оповещены в течении 10 cекунд');
+							window.location.href='/lk';
+						}
+					}
+				});
+			})
+
+		{% elseif page.name == "monitoring" and user.group.id >= 2 %}
+		setInterval(function() {
+			$.ajax({
+				type: 'GET',
+				cache: false,  
+				success: function (html) {
+					$('.monitor').html($(html).find('.monitor').html())
+				}
+			})	
+		}, 3000);
+		{% endif %}
+		</script>
+	</body>
+</html>

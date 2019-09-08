@@ -1,0 +1,85 @@
+# mod_rewrite
+RewriteEngine On
+RewriteBase /
+RewriteCond %{REQUEST_FILENAME} !-l
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !^/DEV/
+RewriteRule .* index.php/$0 [PT]
+php_value upload_max_filesize 5M
+AddDefaultCharset utf-8
+AddCharset utf-8 *
+<IfModule mod_charset.c>
+CharsetSourceEnc utf-8
+CharsetDefault utf-8
+</IfModule>
+<IfModule mod_deflate.c>
+  <FilesMatch "\.(css|js|x?html?|php)$">
+    SetOutputFilter DEFLATE
+  </FilesMatch>
+</IfModule>
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresDefault "access plus 3600 seconds"
+  ExpiresByType image/x-icon "access plus 2592000 seconds"
+  ExpiresByType image/jpeg "access plus 2592000 seconds"
+  ExpiresByType image/png "access plus 2592000 seconds"
+  ExpiresByType image/gif "access plus 2592000 seconds"
+  ExpiresByType application/x-shockwave-flash "access plus 2592000 seconds"
+  ExpiresByType text/css "access plus 604800 seconds"
+  ExpiresByType application/x-javascript "access plus 604800 seconds"
+  ExpiresByType text/html "access plus 3600 seconds"
+  ExpiresByType application/xhtml+xml "access plus 3600 seconds"
+</IfModule>
+<IfModule mod_headers.c>
+  <FilesMatch "\.(ico|jpe?g|png|gif|swf)$">
+    Header set Cache-Control "max-age=2592000, public"
+  </FilesMatch>
+  <FilesMatch "\.(css)$">
+    Header set Cache-Control "max-age=604800, public"
+  </FilesMatch>
+  <FilesMatch "\.(x?html?|php)$">
+    Header set Cache-Control "max-age=3600, private, must-revalidate"
+  </FilesMatch>
+</IfModule>
+<ifModule mod_headers.c>
+  <filesMatch "\.(ico|pdf|flv|jpg|jpeg|png|gif|css|swf)$">
+    Header unset ETag
+    FileETag None
+ </filesMatch>
+</ifModule>
+<ifModule mod_headers.c>
+  Header unset Last-Modified
+</ifModule>
+
+ErrorDocument 403 /404
+
+<Files .htaccess>
+ order allow,deny
+ deny from all
+</Files>
+
+<Files *.key>
+ order allow,deny
+ deny from all
+</Files>
+
+<Files *.ini>
+ order allow,deny
+ deny from all
+</Files>
+
+<Files *.link>
+ order allow,deny
+ deny from all
+</Files>
+
+<Files *.html>
+ order allow,deny
+ deny from all
+</Files>
+
+<Files composer.*>
+ order allow,deny
+ deny from all
+</Files>

@@ -1,0 +1,29 @@
+<div class="blog-area pt-120 pb-90">
+	<div class="container">
+		<div class="section-title mb-60 text-center" style="background-image:url(./site/assets/img/logo/section.png)">
+			<h4>БЛОГ</h4>
+			<h2>Последние новости</h2>
+		</div>
+		<div class="row">
+			{% for item in news %}
+				<div class="col-md-4 col-sm-6">
+					<div class="blog-wrapper mb-30">
+						<div class="blog-img">
+							<a href="#"><img src="{{item.img.src}}" alt="{{item.img.title}}" /></a>
+						</div>-->
+						<div class="blog-text">
+							<div class="blog-info">
+								<h3><a href="#">{{item.prev}}</p>
+							</div>
+							<div class="blog-date">
+								<span><i class="fa fa-clock-o"></i>{{item.date}}</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			{% else %}
+				<center><h4>Нет новостей</h4></center>
+			{% endfor %}
+		</div>
+	</div>
+</div>
