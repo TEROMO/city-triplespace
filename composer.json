@@ -2,6 +2,6 @@
     "require": {
         "nikic/fast-route": "^1.3",
         "gabordemooij/redbean": "^5.3",
-        "twig/twig": "1.*"
+        "twig/twig": "3.*"
     }
 }
